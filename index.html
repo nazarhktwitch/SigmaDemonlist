@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sigma Demon List — Hardest Easy Demons</title>
+<title>Sigma Demon List — Hardest Demons</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -32,7 +32,6 @@ input,select{font-family:'Nunito',sans-serif}
   --bronze:#cd7f32;
 }
 
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);background:rgba(15,15,26,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 22px;gap:0}
 .nav-brand{display:flex;align-items:center;gap:11px;margin-right:28px}
 .nav-logo{width:30px;height:30px;border-radius:7px;background:var(--acc);display:flex;align-items:center;justify-content:center;flex-shrink:0}
@@ -45,10 +44,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
 .nav-right{margin-left:auto;font-size:12px;color:var(--t3);font-weight:600}
 .nav-right b{color:var(--acc);font-weight:900}
 
-/* LAYOUT */
 .app{display:flex;padding-top:var(--nav-h);flex:1;min-height:0;height:calc(100vh - var(--nav-h))}
 
-/* SIDEBAR */
 .sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--bg0);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100%;overflow:hidden}
 .sb-top{padding:12px 12px 8px;border-bottom:1px solid var(--border);flex-shrink:0}
 .search-wrap{position:relative}
@@ -61,7 +58,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
 .list-scroll::-webkit-scrollbar{width:3px}
 .list-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
 
-/* LIST ITEM */
 .list-item{display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid rgba(44,44,80,.6);cursor:pointer;transition:background .12s;position:relative;user-select:none}
 .list-item:hover{background:var(--bg2)}
 .list-item.active{background:var(--bg3)}
@@ -78,7 +74,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
 .li-pts{font-size:11px;font-weight:700;color:var(--t3);font-family:'Source Code Pro',monospace;flex-shrink:0}
 .list-empty{padding:28px;text-align:center;color:var(--t3);font-size:13px}
 
-/* DETAIL */
 .detail{flex:1;overflow-y:auto;min-width:0;background:var(--bg1)}
 .detail-welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px;text-align:center}
 .detail-welcome h2{font-size:26px;font-weight:900;color:var(--white);margin-bottom:10px}
@@ -88,7 +83,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
 .ws .n{font-size:30px;font-weight:900;color:var(--acc);font-family:'Source Code Pro',monospace}
 .ws .l{font-size:11px;color:var(--t2);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-top:4px}
 
-/* LEVEL DETAIL */
 .level-detail{max-width:860px;margin:0 auto;padding-bottom:60px}
 .ld-hero{border-bottom:1px solid var(--border);padding:28px 32px 24px;background:linear-gradient(160deg,rgba(230,57,80,.07) 0%,transparent 60%)}
 .ld-hero-top{display:flex;align-items:flex-start;gap:18px}
@@ -128,11 +122,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
 .rec-name{font-size:12px;font-weight:800;color:var(--white);flex:1}
 .rec-score{font-size:11px;color:var(--t2);font-weight:700}
 
-/* FOOTER */
 footer{background:var(--bg0);border-top:1px solid var(--border);padding:16px 32px;font-size:12px;color:var(--t3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 footer b{color:var(--acc);font-weight:900}
 
-/* TOAST */
 .toast{position:fixed;bottom:22px;right:22px;z-index:999;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:11px 16px;font-size:13px;font-weight:700;color:var(--white);box-shadow:0 8px 28px rgba(0,0,0,.5);transition:opacity .3s}
 @keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
@@ -199,7 +191,7 @@ footer b{color:var(--acc);font-weight:900}
         </svg>
       </div>
       <h2>Welcome to the Sigma Demon List</h2>
-      <p>The definitive ranking of Geometry Dash levels that look like they belong on the Easiest Demons list — but will haunt your nightmares forever. Select any level from the list to view its details.</p>
+      <p>The definitive ranking of Geometry Dash levels that look like they belong on the Hardest Demons list — but will haunt your nightmares forever. Select any level from the list to view its details.</p>
       <div class="welcome-stats">
         <div class="ws"><div class="n" id="totalCount">0</div><div class="l">Ranked Demons</div></div>
         <div class="ws"><div class="n">2</div><div class="l">Verified Videos</div></div>
@@ -216,7 +208,6 @@ footer b{color:var(--acc);font-weight:900}
 </footer>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────────
 const LEVELS=[
 {rank:1,name:"ReTraY",publisher:"DiMaViKuLov26",points:350,videoVerified:"https://www.youtube.com/watch?v=H7CHufpZguk",firstVictor:"https://www.youtube.com/watch?v=yGiG9M7mK2M",description:"Retro-styled extreme demon by DiMaViKuLov26. Despite its innocent pastel visuals and bouncy chiptune soundtrack, this level contains frame-perfect timing sequences that have permanently erased the sanity of thousands of players. The bright colors are a psychological trap. The community considers it spiritually equivalent to Bloodbath, just with cuter graphics.",col:"#e85d2f"},
 {rank:2,name:"Back On Track",publisher:"RobTop",points:349,videoVerified:"https://www.youtube.com/watch?v=wPI_I5gFZ2I",firstVictor:"https://www.youtube.com/watch?v=bYHr4pGlP98",description:"The legendary creation of Geometry Dash creator RobTop himself. Back On Track looks like the most trivial level ever conceived — and then the 47% spike arrives. A single, pixel-perfect, reality-shattering jump that has claimed more victims than any extreme demon in history. Sigma List analysts estimate that over 93% of all GD controller-throwing incidents are directly attributable to this level. No one is ready. No one has ever been ready. No one ever will be.",col:"#e84fad"},
@@ -354,14 +345,11 @@ const PLAYERS=[
 {name:"certifed_L_takr",score:30,demons:9}
 ];
 
-// ── ICON ──────────────────────────────────────────────────────
 function dk(h,a){const r=Math.max(0,parseInt(h.slice(1,3),16)-a),g=Math.max(0,parseInt(h.slice(3,5),16)-a),b=Math.max(0,parseInt(h.slice(5,7),16)-a);return`#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`}
 function icon(c,s=38){const id='g'+c.slice(1);return`<svg width="${s}" height="${s}" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c}"/><stop offset="100%" stop-color="${dk(c,50)}"/></linearGradient></defs><rect width="38" height="38" rx="8" fill="url(#${id})"/><polygon points="10,9 7,2 13,7" fill="${dk(c,70)}"/><polygon points="28,9 31,2 25,7" fill="${dk(c,70)}"/><ellipse cx="13.5" cy="16.5" rx="5" ry="5.8" fill="white" opacity=".95"/><ellipse cx="24.5" cy="16.5" rx="5" ry="5.8" fill="white" opacity=".95"/><ellipse cx="13.8" cy="17.2" rx="2.9" ry="3.3" fill="#110816"/><ellipse cx="24.8" cy="17.2" rx="2.9" ry="3.3" fill="#110816"/><ellipse cx="15" cy="15.8" rx="1.1" ry="1.3" fill="white" opacity=".65"/><ellipse cx="26" cy="15.8" rx="1.1" ry="1.3" fill="white" opacity=".65"/><path d="M12 27 Q19 33 26 27" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/><rect x="16.5" y="27" width="2.5" height="3" rx=".8" fill="white"/><rect x="19.5" y="27" width="2.5" height="3" rx=".8" fill="white"/></svg>`}
 
-// ── STATE ─────────────────────────────────────────────────────
 let activeRank=null;
 
-// ── FILTER / SORT ─────────────────────────────────────────────
 function getFiltered(){
   const term=document.getElementById('q').value.trim().toLowerCase();
   const fv=document.getElementById('filter').value;
@@ -376,7 +364,6 @@ function getFiltered(){
   return arr;
 }
 
-// ── RENDER LIST ───────────────────────────────────────────────
 function renderList(){
   const scroll=document.getElementById('listScroll');
   const arr=getFiltered();
@@ -392,7 +379,6 @@ function renderList(){
   }).join('');
 }
 
-// ── SELECT LEVEL ──────────────────────────────────────────────
 function selectLevel(rank){
   const l=LEVELS.find(x=>x.rank===rank);
   if(!l)return;
@@ -450,7 +436,6 @@ function selectLevel(rank){
   document.getElementById('detail').scrollTo(0,0);
 }
 
-// ── VIEWS ─────────────────────────────────────────────────────
 function showWelcome(){
   activeRank=null;renderList();
   document.getElementById('welcome').style.display='flex';
@@ -494,7 +479,6 @@ function showGuidelines(){
   document.getElementById('detail').scrollTo(0,0);
 }
 
-// ── UTILS ─────────────────────────────────────────────────────
 function playVideo(el,id){window.open('https://www.youtube.com/watch?v='+id,'_blank')}
 function setNav(i){document.querySelectorAll('.nav-link').forEach((el,j)=>el.classList.toggle('active',i===j))}
 function ytID(url){try{if(!url)return null;const u=new URL(url);if(u.hostname.includes('youtu.be'))return u.pathname.slice(1).split('?')[0];if(u.searchParams.get('v'))return u.searchParams.get('v');const m=url.match(/\/embed\/([^?&\/]+)/);if(m)return m[1]}catch(e){}return null}
@@ -502,7 +486,6 @@ function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').
 function copyLink(){navigator.clipboard?.writeText(location.href).then(()=>toast('Link copied!'))}
 function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300)},2000)}
 
-// ── INIT ──────────────────────────────────────────────────────
 document.getElementById('totalCount').textContent=LEVELS.length;
 document.getElementById('navCount').textContent=LEVELS.length;
 document.getElementById('q').addEventListener('input',renderList);
