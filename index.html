@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sigma Demon List — Hardest Easy Demons</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:'Nunito',sans-serif;background:#1a1a2e;color:#c8d0e0;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+button{font-family:'Nunito',sans-serif;cursor:pointer}
+input,select{font-family:'Nunito',sans-serif}
+:root{
+  --nav-h:52px;
+  --sidebar-w:310px;
+  --bg0:#0f0f1a;
+  --bg1:#1a1a2e;
+  --bg2:#21213a;
+  --bg3:#2a2a48;
+  --border:#2c2c50;
+  --border2:#3a3a60;
+  --acc:#e63950;
+  --acc-dim:rgba(230,57,80,.14);
+  --text:#c8d0e0;
+  --t2:#7a8499;
+  --t3:#4a5266;
+  --white:#eef2ff;
+  --gold:#f5c518;
+  --silver:#aab4c4;
+  --bronze:#cd7f32;
+}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);background:rgba(15,15,26,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 22px;gap:0}
+.nav-brand{display:flex;align-items:center;gap:11px;margin-right:28px}
+.nav-logo{width:30px;height:30px;border-radius:7px;background:var(--acc);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-logo svg{display:block}
+.nav-title{font-size:15px;font-weight:900;color:var(--white);letter-spacing:-.3px}
+.nav-links{display:flex;gap:2px}
+.nav-link{padding:5px 13px;border-radius:6px;font-size:13px;font-weight:700;color:var(--t2);transition:all .14s;cursor:pointer;border:none;background:none}
+.nav-link:hover{background:var(--bg3);color:var(--white)}
+.nav-link.active{color:var(--acc)}
+.nav-right{margin-left:auto;font-size:12px;color:var(--t3);font-weight:600}
+.nav-right b{color:var(--acc);font-weight:900}
+
+/* LAYOUT */
+.app{display:flex;padding-top:var(--nav-h);flex:1;min-height:0;height:calc(100vh - var(--nav-h))}
+
+/* SIDEBAR */
+.sidebar{width:var(--sidebar-w);flex-shrink:0;background:var(--bg0);border-right:1px solid var(--border);display:flex;flex-direction:column;height:100%;overflow:hidden}
+.sb-top{padding:12px 12px 8px;border-bottom:1px solid var(--border);flex-shrink:0}
+.search-wrap{position:relative}
+.search-wrap input{width:100%;padding:8px 10px 8px 32px;border-radius:7px;border:1px solid var(--border2);background:var(--bg2);color:var(--white);font-size:13px;outline:none;transition:border-color .18s}
+.search-wrap input:focus{border-color:var(--acc)}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--t3);pointer-events:none}
+.filter-row{display:flex;gap:5px;margin-top:7px}
+.filter-row select{flex:1;padding:5px 7px;border-radius:6px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:12px;outline:none;cursor:pointer}
+.list-scroll{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--border2) transparent}
+.list-scroll::-webkit-scrollbar{width:3px}
+.list-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* LIST ITEM */
+.list-item{display:flex;align-items:center;gap:9px;padding:8px 12px;border-bottom:1px solid rgba(44,44,80,.6);cursor:pointer;transition:background .12s;position:relative;user-select:none}
+.list-item:hover{background:var(--bg2)}
+.list-item.active{background:var(--bg3)}
+.list-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--acc);border-radius:0 2px 2px 0}
+.li-rank{font-family:'Source Code Pro',monospace;font-size:11px;font-weight:600;color:var(--t3);width:26px;text-align:right;flex-shrink:0}
+.li-rank.gold{color:var(--gold)}
+.li-rank.silver{color:var(--silver)}
+.li-rank.bronze{color:var(--bronze)}
+.li-icon{width:38px;height:38px;border-radius:8px;overflow:hidden;flex-shrink:0}
+.li-icon svg{display:block;width:100%;height:100%}
+.li-info{flex:1;min-width:0}
+.li-name{font-size:13px;font-weight:800;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2}
+.li-pub{font-size:11px;color:var(--t2);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.li-pts{font-size:11px;font-weight:700;color:var(--t3);font-family:'Source Code Pro',monospace;flex-shrink:0}
+.list-empty{padding:28px;text-align:center;color:var(--t3);font-size:13px}
+
+/* DETAIL */
+.detail{flex:1;overflow-y:auto;min-width:0;background:var(--bg1)}
+.detail-welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%;padding:40px;text-align:center}
+.detail-welcome h2{font-size:26px;font-weight:900;color:var(--white);margin-bottom:10px}
+.detail-welcome p{font-size:14px;color:var(--t2);max-width:460px;line-height:1.7}
+.welcome-stats{display:flex;gap:18px;margin-top:28px;flex-wrap:wrap;justify-content:center}
+.ws{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:18px 24px;text-align:center}
+.ws .n{font-size:30px;font-weight:900;color:var(--acc);font-family:'Source Code Pro',monospace}
+.ws .l{font-size:11px;color:var(--t2);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-top:4px}
+
+/* LEVEL DETAIL */
+.level-detail{max-width:860px;margin:0 auto;padding-bottom:60px}
+.ld-hero{border-bottom:1px solid var(--border);padding:28px 32px 24px;background:linear-gradient(160deg,rgba(230,57,80,.07) 0%,transparent 60%)}
+.ld-hero-top{display:flex;align-items:flex-start;gap:18px}
+.ld-icon-lg{width:68px;height:68px;border-radius:13px;overflow:hidden;flex-shrink:0;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+.ld-icon-lg svg{display:block;width:100%;height:100%}
+.ld-hero-info{flex:1;min-width:0}
+.ld-hero-info h1{font-size:24px;font-weight:900;color:var(--white);line-height:1.1}
+.ld-hero-info .pub{font-size:13px;color:var(--t2);margin-top:5px}
+.ld-hero-right{text-align:right;flex-shrink:0}
+.rank-pill{display:inline-block;background:var(--acc);color:#fff;font-size:12px;font-weight:900;padding:3px 11px;border-radius:999px;font-family:'Source Code Pro',monospace}
+.pts-pill{font-size:12px;color:var(--t2);font-weight:700;margin-top:5px}
+.ld-body{display:grid;grid-template-columns:1fr 264px}
+.ld-main{padding:24px 32px;border-right:1px solid var(--border)}
+.ld-side{padding:24px 22px}
+.sec-label{font-size:10px;font-weight:800;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:10px}
+.video-frame{width:100%;position:relative;padding-top:56.25%;border-radius:9px;background:var(--bg0);overflow:hidden;border:1px solid var(--border)}
+.video-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;display:block}
+.video-frame .no-video-msg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--t3);font-size:13px;text-align:center;white-space:nowrap}
+.ld-desc{margin-top:14px;font-size:13px;color:var(--t2);line-height:1.7;font-style:italic}
+.meta-table{background:var(--bg2);border:1px solid var(--border);border-radius:9px;overflow:hidden}
+.meta-row{display:flex;justify-content:space-between;align-items:center;padding:9px 13px;border-bottom:1px solid var(--border);font-size:12px}
+.meta-row:last-child{border-bottom:none}
+.meta-row .k{color:var(--t2);font-weight:600}
+.meta-row .v{font-weight:800;color:var(--white)}
+.badge-yes{display:inline-block;background:rgba(52,199,89,.14);color:#34c759;border:1px solid rgba(52,199,89,.3);font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.badge-no{display:inline-block;background:rgba(255,255,255,.04);color:var(--t3);font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.link-buttons{display:flex;flex-direction:column;gap:7px;margin-top:14px}
+.link-btn{display:block;text-align:center;padding:9px;border-radius:7px;font-size:12px;font-weight:800;border:1px solid var(--border);background:var(--bg2);color:var(--text);transition:all .14s;cursor:pointer}
+.link-btn:hover{background:var(--bg3);border-color:var(--border2);color:var(--white)}
+.link-btn.primary{background:var(--acc);border-color:var(--acc);color:#fff}
+.link-btn.primary:hover{opacity:.88}
+.link-btn.disabled{opacity:.28;pointer-events:none}
+.records-section{margin-top:22px}
+.no-rec{font-size:12px;color:var(--t3);font-style:italic}
+.rec-item{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--bg2);border:1px solid var(--border);border-radius:7px;margin-bottom:5px}
+.rec-pos{font-family:'Source Code Pro',monospace;font-size:11px;color:var(--t3);width:18px}
+.rec-name{font-size:12px;font-weight:800;color:var(--white);flex:1}
+.rec-score{font-size:11px;color:var(--t2);font-weight:700}
+
+/* FOOTER */
+footer{background:var(--bg0);border-top:1px solid var(--border);padding:16px 32px;font-size:12px;color:var(--t3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+footer b{color:var(--acc);font-weight:900}
+
+/* TOAST */
+.toast{position:fixed;bottom:22px;right:22px;z-index:999;background:var(--bg3);border:1px solid var(--border2);border-radius:9px;padding:11px 16px;font-size:13px;font-weight:700;color:var(--white);box-shadow:0 8px 28px rgba(0,0,0,.5);transition:opacity .3s}
+@keyframes toastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:820px){.ld-body{grid-template-columns:1fr}.ld-main{border-right:none;border-bottom:1px solid var(--border)}}
+@media(max-width:640px){.app{flex-direction:column;height:auto}.sidebar{width:100%;height:auto;border-right:none;border-bottom:1px solid var(--border)}.list-scroll{max-height:260px}.ld-hero{padding:18px 18px 16px}.ld-main,.ld-side{padding:18px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1L10 6H15L11 9.5L12.5 15L8 11.5L3.5 15L5 9.5L1 6H6L8 1Z" fill="white"/></svg>
+    </div>
+    <span class="nav-title">Sigma Demon List</span>
+  </div>
+  <div class="nav-links">
+    <button class="nav-link active" id="nav0" onclick="setNav(0);showWelcome()">Demonlist</button>
+    <button class="nav-link" id="nav1" onclick="setNav(1);showStats()">Stats Viewer</button>
+    <button class="nav-link" id="nav2" onclick="setNav(2);showGuidelines()">Guidelines</button>
+  </div>
+  <div class="nav-right">Total: <b id="navCount">0</b> demons</div>
+</nav>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="sb-top">
+      <div class="search-wrap">
+        <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="q" type="search" placeholder="Search demons...">
+      </div>
+      <div class="filter-row">
+        <select id="filter">
+          <option value="all">All levels</option>
+          <option value="verified">Has video</option>
+          <option value="firstvictor">Has 1st victor</option>
+        </select>
+        <select id="sort">
+          <option value="rank">By rank</option>
+          <option value="name">By name</option>
+          <option value="points">By points</option>
+        </select>
+      </div>
+    </div>
+    <div class="list-scroll" id="listScroll"></div>
+  </aside>
+
+  <main class="detail" id="detail">
+    <div id="welcome" class="detail-welcome">
+      <div style="margin-bottom:20px">
+        <svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+          <rect width="60" height="60" rx="13" fill="#e63950"/>
+          <polygon points="19,9 16,2 22,7" fill="#b02030"/>
+          <polygon points="41,9 44,2 38,7" fill="#b02030"/>
+          <ellipse cx="20" cy="24" rx="6.5" ry="7.5" fill="white"/>
+          <ellipse cx="40" cy="24" rx="6.5" ry="7.5" fill="white"/>
+          <ellipse cx="20" cy="25" rx="3.8" ry="4.5" fill="#110816"/>
+          <ellipse cx="40" cy="25" rx="3.8" ry="4.5" fill="#110816"/>
+          <ellipse cx="21.5" cy="23" rx="1.4" ry="1.6" fill="white" opacity=".7"/>
+          <ellipse cx="41.5" cy="23" rx="1.4" ry="1.6" fill="white" opacity=".7"/>
+          <path d="M18 40 Q30 49 42 40" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <rect x="25.5" y="39" width="4" height="4" rx="1" fill="white"/>
+          <rect x="30.5" y="39" width="4" height="4" rx="1" fill="white"/>
+        </svg>
+      </div>
+      <h2>Welcome to the Sigma Demon List</h2>
+      <p>The definitive ranking of Geometry Dash levels that look like they belong on the Easiest Demons list — but will haunt your nightmares forever. Select any level from the list to view its details.</p>
+      <div class="welcome-stats">
+        <div class="ws"><div class="n" id="totalCount">0</div><div class="l">Ranked Demons</div></div>
+        <div class="ws"><div class="n">2</div><div class="l">Verified Videos</div></div>
+        <div class="ws"><div class="n">0</div><div class="l">Records</div></div>
+      </div>
+    </div>
+    <div id="levelView" style="display:none"></div>
+  </main>
+</div>
+
+<footer>
+  <span>Sigma Demon List &mdash; inspired by <b>pointercrate.com</b></span>
+  <span>Not affiliated with RobTop Games</span>
+</footer>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────
+const LEVELS=[
+{rank:1,name:"ReTraY",publisher:"DiMaViKuLov26",points:350,videoVerified:"https://www.youtube.com/watch?v=H7CHufpZguk",firstVictor:"https://www.youtube.com/watch?v=yGiG9M7mK2M",description:"Retro-styled extreme demon by DiMaViKuLov26. Despite its innocent pastel visuals and bouncy chiptune soundtrack, this level contains frame-perfect timing sequences that have permanently erased the sanity of thousands of players. The bright colors are a psychological trap. The community considers it spiritually equivalent to Bloodbath, just with cuter graphics.",col:"#e85d2f"},
+{rank:2,name:"Back On Track",publisher:"RobTop",points:349,videoVerified:"https://www.youtube.com/watch?v=wPI_I5gFZ2I",firstVictor:"https://www.youtube.com/watch?v=bYHr4pGlP98",description:"The legendary creation of Geometry Dash creator RobTop himself. Back On Track looks like the most trivial level ever conceived — and then the 47% spike arrives. A single, pixel-perfect, reality-shattering jump that has claimed more victims than any extreme demon in history. Sigma List analysts estimate that over 93% of all GD controller-throwing incidents are directly attributable to this level. No one is ready. No one has ever been ready. No one ever will be.",col:"#e84fad"},
+{rank:3,name:"Stereo Madness",publisher:"RobTop",points:348,videoVerified:"https://www.youtube.com/watch?v=v1EwbEIov6Y",firstVictor:"https://www.youtube.com/watch?v=oOlZX4TnAlw",description:"The original RobTop masterpiece that started everything. Stereo Madness appears to be a gentle tutorial — in reality it is a carefully engineered gateway to addiction, suffering, and 3am gaming sessions that you will deeply regret. The boppy music is a war crime.",col:"#5d9ee8"},
+{rank:4,name:"Sonar",publisher:"JerkRat",points:347,videoVerified:"",firstVictor:"",description:"Sonar by JerkRat. Deceptively smooth on the surface, catastrophically unforgiving underneath.",col:"#40b4e8"},
+{rank:5,name:"Dark Paradise",publisher:"Roli GD",points:346,videoVerified:"",firstVictor:"",description:"Dark Paradise by Roli GD. A hauntingly beautiful level that will make you question every decision that led you here.",col:"#7040e8"},
+{rank:6,name:"Promises",publisher:"Adiale",points:345,videoVerified:"",firstVictor:"",description:"Promises by Adiale. It promises to be easy. It lied to your face.",col:"#e840a0"},
+{rank:7,name:"Lucid Dream",publisher:"Dverry",points:344,videoVerified:"",firstVictor:"",description:"Lucid Dream by Dverry. The dream turns to ash around 78%.",col:"#9040e8"},
+{rank:8,name:"ThE WorLd",publisher:"x8Px",points:343,videoVerified:"",firstVictor:"",description:"ThE WorLd by x8Px. The capitalization is intentional. The suffering is also intentional.",col:"#e84040"},
+{rank:9,name:"Ocean Of Dreams",publisher:"Spu7Nix",points:342,videoVerified:"",firstVictor:"",description:"Ocean Of Dreams by Spu7Nix. Serene. Peaceful. Absolutely ruthless.",col:"#2090e8"},
+{rank:10,name:"Warmth",publisher:"KFAOpitar",points:341,videoVerified:"",firstVictor:"",description:"Warmth by KFAOpitar. Feels warm until you crash for the 400th time.",col:"#e89040"},
+{rank:11,name:"Sunset",publisher:"SEM",points:340,videoVerified:"",firstVictor:"",description:"Sunset by SEM.",col:"#e86830"},
+{rank:12,name:"Darkness",publisher:"Phenoix",points:339,videoVerified:"",firstVictor:"",description:"Darkness by Phenoix. The name applies to both the aesthetics and your future.",col:"#4030a8"},
+{rank:13,name:"A Spark Of Life",publisher:"lilbin",points:338,videoVerified:"",firstVictor:"",description:"A Spark Of Life by lilbin. That spark gets extinguished at 63%.",col:"#e8c030"},
+{rank:14,name:"Feather",publisher:"lilbin",points:337,videoVerified:"",firstVictor:"",description:"Feather by lilbin. Light as air. Heavy on the soul.",col:"#80d8e8"},
+{rank:15,name:"Stageix",publisher:"TheRealDarnoc",points:336,videoVerified:"",firstVictor:"",description:"Stageix by TheRealDarnoc.",col:"#a040e8"},
+{rank:16,name:"Flappy Jumper 2",publisher:"CaptainxPiggy",points:335,videoVerified:"",firstVictor:"",description:"Flappy Jumper 2 by CaptainxPiggy. A sequel that surpasses its predecessor purely in human suffering.",col:"#e85080"},
+{rank:17,name:"xDarkx",publisher:"troloCRACK",points:334,videoVerified:"",firstVictor:"",description:"xDarkx by troloCRACK.",col:"#3020a8"},
+{rank:18,name:"When The Leaves Fall",publisher:"Hyenada",points:333,videoVerified:"",firstVictor:"",description:"When The Leaves Fall by Hyenada. Beautiful seasonal aesthetics. Merciless gameplay.",col:"#c87020"},
+{rank:19,name:"Rage Quit",publisher:"bli",points:332,videoVerified:"",firstVictor:"",description:"Rage Quit by bli. The name serves as both a title and an instruction manual.",col:"#e83030"},
+{rank:20,name:"Moving Obstacles",publisher:"SumSar",points:331,videoVerified:"",firstVictor:"",description:"Moving Obstacles by SumSar.",col:"#30a8e8"},
+{rank:21,name:"Bright Eclipse",publisher:"Spa8",points:330,videoVerified:"",firstVictor:"",description:"Bright Eclipse by Spa8.",col:"#e8d820"},
+{rank:22,name:"IZnite",publisher:"Izhar",points:329,videoVerified:"",firstVictor:"",description:"IZnite by Izhar.",col:"#20e8c0"},
+{rank:23,name:"Adrift",publisher:"Ghostface",points:328,videoVerified:"",firstVictor:"",description:"Adrift by Ghostface. Lost at sea with no way back.",col:"#2040e8"},
+{rank:24,name:"Whipped Cream",publisher:"IFrostII",points:327,videoVerified:"",firstVictor:"",description:"Whipped Cream by IFrostII. Sweet on the outside.",col:"#e8a0f0"},
+{rank:25,name:"Candescent",publisher:"CastriX",points:326,videoVerified:"",firstVictor:"",description:"Candescent by CastriX.",col:"#e8a840"},
+{rank:26,name:"Dream of Night",publisher:"SUOMI",points:325,videoVerified:"",firstVictor:"",description:"Dream of Night by SUOMI.",col:"#2030a0"},
+{rank:27,name:"Geometry Dance",publisher:"Dudex",points:324,videoVerified:"",firstVictor:"",description:"Geometry Dance by Dudex. You will not be dancing by the end.",col:"#e840c8"},
+{rank:28,name:"Findexis Madness 2",publisher:"Findexi",points:323,videoVerified:"",firstVictor:"",description:"Findexis Madness 2 by Findexi.",col:"#40c8e8"},
+{rank:29,name:"Soothe",publisher:"Epiphani",points:322,videoVerified:"",firstVictor:"",description:"Soothe by Epiphani. Soothes absolutely nothing.",col:"#80e8b0"},
+{rank:30,name:"Practice Level",publisher:"YunHaSeu14",points:321,videoVerified:"",firstVictor:"",description:"Practice Level by YunHaSeu14. Harder than most actual demons.",col:"#a8a8e8"},
+{rank:31,name:"Practice Domination",publisher:"ISonicSpeedi",points:320,videoVerified:"",firstVictor:"",description:"Practice Domination by ISonicSpeedi.",col:"#e88040"},
+{rank:32,name:"Stereo Madness 2",publisher:"IlElDanteII",points:319,videoVerified:"",firstVictor:"",description:"Stereo Madness 2 by IlElDanteII. The sequel nobody asked for but everyone suffers through.",col:"#4080e8"},
+{rank:33,name:"Never Be Alone",publisher:"MalZir",points:318,videoVerified:"",firstVictor:"",description:"Never Be Alone by MalZir. You are never alone — the level is always watching.",col:"#e84060"},
+{rank:34,name:"Serene Time",publisher:"Dister K",points:317,videoVerified:"",firstVictor:"",description:"Serene Time by Dister K.",col:"#40c0a0"},
+{rank:35,name:"PeAsY WoRlD II",publisher:"DiMaViKuLov26",points:316,videoVerified:"",firstVictor:"",description:"PeAsY WoRlD II by DiMaViKuLov26.",col:"#c040e8"},
+{rank:36,name:"If Cataclysm Was L1",publisher:"Morpheix",points:315,videoVerified:"",firstVictor:"",description:"If Cataclysm Was L1 by Morpheix. A cursed hypothetical made terrifyingly real.",col:"#e83050"},
+{rank:37,name:"AlterGame",publisher:"Serponge",points:314,videoVerified:"",firstVictor:"",description:"AlterGame by Serponge.",col:"#30a060"},
+{rank:38,name:"Super Mario Galaxy",publisher:"Serponge",points:313,videoVerified:"",firstVictor:"",description:"Super Mario Galaxy by Serponge. Mario would not survive this.",col:"#e84030"},
+{rank:39,name:"Sacred Crescent",publisher:"Pineapple",points:312,videoVerified:"",firstVictor:"",description:"Sacred Crescent by Pineapple.",col:"#6040e8"},
+{rank:40,name:"Gravity Falls",publisher:"Echonox",points:311,videoVerified:"",firstVictor:"",description:"Gravity Falls by Echonox. The gravity falls. So will you.",col:"#20a0d0"},
+{rank:41,name:"Flight Of Space 1",publisher:"KFAOpitar",points:310,videoVerified:"",firstVictor:"",description:"Flight Of Space 1 by KFAOpitar.",col:"#1030a8"},
+{rank:42,name:"Flappy Bird",publisher:"TheRealDarnoc",points:309,videoVerified:"",firstVictor:"",description:"Flappy Bird by TheRealDarnoc. Harder than the mobile game. Significantly.",col:"#40c030"},
+{rank:43,name:"High Hill",publisher:"Various",points:308,videoVerified:"",firstVictor:"",description:"High Hill.",col:"#808040"},
+{rank:44,name:"Square Adventure",publisher:"Various",points:307,videoVerified:"",firstVictor:"",description:"Square Adventure.",col:"#e8a020"},
+{rank:45,name:"Flappy UFO",publisher:"Various",points:306,videoVerified:"",firstVictor:"",description:"Flappy UFO.",col:"#20d0e8"},
+{rank:46,name:"Weightlessness",publisher:"Various",points:305,videoVerified:"",firstVictor:"",description:"Weightlessness.",col:"#c0a0e8"},
+{rank:47,name:"Auto Play Area",publisher:"Various",points:304,videoVerified:"",firstVictor:"",description:"Auto Play Area. You still die.",col:"#a0e040"},
+{rank:48,name:"Auto Stereo Madness",publisher:"Various",points:303,videoVerified:"",firstVictor:"",description:"Auto Stereo Madness.",col:"#3070e8"},
+{rank:49,name:"Auto Retray",publisher:"Various",points:302,videoVerified:"",firstVictor:"",description:"Auto Retray.",col:"#e87030"},
+{rank:50,name:"Prosto Level",publisher:"Various",points:301,videoVerified:"",firstVictor:"",description:"Prosto Level. A meme name with legendary community status.",col:"#a030c0"},
+{rank:51,name:"Impossible Easy Level",publisher:"Various",points:300,videoVerified:"",firstVictor:"",description:"Impossible Easy Level.",col:"#e84040"},
+{rank:52,name:"Worlds Hardest Easy",publisher:"Various",points:299,videoVerified:"",firstVictor:"",description:"Worlds Hardest Easy.",col:"#40a0e8"},
+{rank:53,name:"One Jump Challenge",publisher:"Various",points:298,videoVerified:"",firstVictor:"",description:"One Jump Challenge. One jump. Infinite pain.",col:"#e86020"},
+{rank:54,name:"0.1 Clicks",publisher:"Various",points:297,videoVerified:"",firstVictor:"",description:"0.1 Clicks.",col:"#20c0a0"},
+{rank:55,name:"Literally Free",publisher:"Various",points:296,videoVerified:"",firstVictor:"",description:"Literally Free. It is not.",col:"#d0e040"},
+{rank:56,name:"Impossible Stereo Madness",publisher:"Various",points:295,videoVerified:"",firstVictor:"",description:"Impossible Stereo Madness.",col:"#4050e8"},
+{rank:57,name:"Auto But Hard",publisher:"Various",points:294,videoVerified:"",firstVictor:"",description:"Auto But Hard.",col:"#e83060"},
+{rank:58,name:"One Spike Challenge",publisher:"Various",points:293,videoVerified:"",firstVictor:"",description:"One Spike Challenge.",col:"#c04020"},
+{rank:59,name:"Two Clicks",publisher:"Various",points:292,videoVerified:"",firstVictor:"",description:"Two Clicks.",col:"#40e890"},
+{rank:60,name:"Practice Simulator",publisher:"Various",points:291,videoVerified:"",firstVictor:"",description:"Practice Simulator.",col:"#a0a0e8"},
+{rank:61,name:"Blindfold Challenge",publisher:"Various",points:290,videoVerified:"",firstVictor:"",description:"Blindfold Challenge.",col:"#383858"},
+{rank:62,name:"Impossible Retray",publisher:"Various",points:289,videoVerified:"",firstVictor:"",description:"Impossible Retray.",col:"#e85030"},
+{rank:63,name:"0 Frame Timing",publisher:"Various",points:288,videoVerified:"",firstVictor:"",description:"0 Frame Timing. Requires a timing that does not physically exist in our universe.",col:"#20e8d0"},
+{rank:64,name:"Spam Click",publisher:"Various",points:287,videoVerified:"",firstVictor:"",description:"Spam Click.",col:"#e84050"},
+{rank:65,name:"Fake Extreme Demon",publisher:"Various",points:286,videoVerified:"",firstVictor:"",description:"Fake Extreme Demon. Genuinely harder than some real extreme demons.",col:"#8020c0"},
+{rank:66,name:"Hardest Easy Ever",publisher:"Various",points:285,videoVerified:"",firstVictor:"",description:"Hardest Easy Ever.",col:"#e83040"},
+{rank:67,name:"Impossible Layout",publisher:"Various",points:284,videoVerified:"",firstVictor:"",description:"Impossible Layout.",col:"#603080"},
+{rank:68,name:"Geometry Dash Tutorial",publisher:"Various",points:283,videoVerified:"",firstVictor:"",description:"Geometry Dash Tutorial.",col:"#3090e8"},
+{rank:69,name:"Practice Simulator 2",publisher:"Various",points:282,videoVerified:"",firstVictor:"",description:"Practice Simulator 2.",col:"#b0a0e8"},
+{rank:70,name:"0 Attempt Level",publisher:"Various",points:281,videoVerified:"",firstVictor:"",description:"0 Attempt Level.",col:"#20c070"},
+{rank:71,name:"Literally Nothing",publisher:"Various",points:280,videoVerified:"",firstVictor:"",description:"Literally Nothing.",col:"#808090"},
+{rank:72,name:"Cube Test",publisher:"Various",points:279,videoVerified:"",firstVictor:"",description:"Cube Test.",col:"#4080a0"},
+{rank:73,name:"Jump Test",publisher:"Various",points:278,videoVerified:"",firstVictor:"",description:"Jump Test.",col:"#e89040"},
+{rank:74,name:"Timing Test",publisher:"Various",points:277,videoVerified:"",firstVictor:"",description:"Timing Test.",col:"#40c0e8"},
+{rank:75,name:"Spam Test",publisher:"Various",points:276,videoVerified:"",firstVictor:"",description:"Spam Test.",col:"#e84030"},
+{rank:76,name:"Wave Tutorial",publisher:"Various",points:275,videoVerified:"",firstVictor:"",description:"Wave Tutorial.",col:"#2060c0"},
+{rank:77,name:"Ship Tutorial",publisher:"Various",points:274,videoVerified:"",firstVictor:"",description:"Ship Tutorial.",col:"#50a0e0"},
+{rank:78,name:"Cube Basics",publisher:"Various",points:273,videoVerified:"",firstVictor:"",description:"Cube Basics.",col:"#a06020"},
+{rank:79,name:"Tap Training",publisher:"Various",points:272,videoVerified:"",firstVictor:"",description:"Tap Training.",col:"#40b070"},
+{rank:80,name:"Basic Layout",publisher:"Various",points:271,videoVerified:"",firstVictor:"",description:"Basic Layout.",col:"#a0a020"},
+{rank:81,name:"First Level Ever",publisher:"Various",points:270,videoVerified:"",firstVictor:"",description:"First Level Ever.",col:"#e8a030"},
+{rank:82,name:"Chambers",publisher:"Various",points:269,videoVerified:"",firstVictor:"",description:"Chambers.",col:"#506080"},
+{rank:83,name:"Through Time",publisher:"Various",points:268,videoVerified:"",firstVictor:"",description:"Through Time.",col:"#4040c0"},
+{rank:84,name:"Infernal Arena",publisher:"Various",points:267,videoVerified:"",firstVictor:"",description:"Infernal Arena.",col:"#c03020"},
+{rank:85,name:"Lets Run",publisher:"Various",points:266,videoVerified:"",firstVictor:"",description:"Lets Run.",col:"#30c060"},
+{rank:86,name:"End Of Line",publisher:"Various",points:265,videoVerified:"",firstVictor:"",description:"End Of Line.",col:"#e040a0"},
+{rank:87,name:"DorabaeBasic4",publisher:"Various",points:264,videoVerified:"",firstVictor:"",description:"DorabaeBasic4.",col:"#7060a0"},
+{rank:88,name:"Acid Factory",publisher:"Various",points:263,videoVerified:"",firstVictor:"",description:"Acid Factory.",col:"#a0e030"},
+{rank:89,name:"Amplification",publisher:"Various",points:262,videoVerified:"",firstVictor:"",description:"Amplification.",col:"#e87050"},
+{rank:90,name:"Dreamland",publisher:"Various",points:261,videoVerified:"",firstVictor:"",description:"Dreamland.",col:"#6040b0"},
+{rank:91,name:"OuterSpace",publisher:"Various",points:260,videoVerified:"",firstVictor:"",description:"OuterSpace.",col:"#102060"},
+{rank:92,name:"Level Easy",publisher:"Various",points:259,videoVerified:"",firstVictor:"",description:"Level Easy.",col:"#50c050"},
+{rank:93,name:"Tutorial Level",publisher:"Various",points:258,videoVerified:"",firstVictor:"",description:"Tutorial Level.",col:"#3090c0"},
+{rank:94,name:"Beginner Level",publisher:"Various",points:257,videoVerified:"",firstVictor:"",description:"Beginner Level.",col:"#80d060"},
+{rank:95,name:"Start Dash",publisher:"Various",points:256,videoVerified:"",firstVictor:"",description:"Start Dash.",col:"#e86040"},
+{rank:96,name:"Basic Flow",publisher:"Various",points:255,videoVerified:"",firstVictor:"",description:"Basic Flow.",col:"#3080b0"},
+{rank:97,name:"Easy Road",publisher:"Various",points:254,videoVerified:"",firstVictor:"",description:"Easy Road.",col:"#70b030"},
+{rank:98,name:"Intro Challenge",publisher:"Various",points:253,videoVerified:"",firstVictor:"",description:"Intro Challenge.",col:"#a030e8"},
+{rank:99,name:"First Level",publisher:"Various",points:252,videoVerified:"",firstVictor:"",description:"First Level.",col:"#e89050"},
+{rank:100,name:"Cube Jump",publisher:"Various",points:251,videoVerified:"",firstVictor:"",description:"Cube Jump.",col:"#2080a0"},
+{rank:101,name:"Timing Practice",publisher:"Various",points:250,videoVerified:"",firstVictor:"",description:"Timing Practice.",col:"#e0a030"},
+{rank:102,name:"Mini Challenge",publisher:"Various",points:249,videoVerified:"",firstVictor:"",description:"Mini Challenge.",col:"#a060e8"},
+{rank:103,name:"Tap Test",publisher:"Various",points:248,videoVerified:"",firstVictor:"",description:"Tap Test.",col:"#30b060"},
+{rank:104,name:"Slow Motion",publisher:"Various",points:247,videoVerified:"",firstVictor:"",description:"Slow Motion.",col:"#8090a0"},
+{rank:105,name:"Cube Basics 2",publisher:"Various",points:246,videoVerified:"",firstVictor:"",description:"Cube Basics 2.",col:"#b07030"},
+{rank:106,name:"Easy Wave",publisher:"Various",points:245,videoVerified:"",firstVictor:"",description:"Easy Wave.",col:"#2070c8"},
+{rank:107,name:"Auto Path",publisher:"Various",points:244,videoVerified:"",firstVictor:"",description:"Auto Path.",col:"#80a030"},
+{rank:108,name:"Simple Path",publisher:"Various",points:243,videoVerified:"",firstVictor:"",description:"Simple Path.",col:"#60b080"},
+{rank:109,name:"Spam Layout",publisher:"Various",points:242,videoVerified:"",firstVictor:"",description:"Spam Layout.",col:"#e03050"},
+{rank:110,name:"Level Pack 1",publisher:"Various",points:241,videoVerified:"",firstVictor:"",description:"Level Pack 1.",col:"#5060a0"},
+{rank:111,name:"Level Pack 2",publisher:"Various",points:240,videoVerified:"",firstVictor:"",description:"Level Pack 2.",col:"#4070b0"},
+{rank:112,name:"Alpha Pack 1",publisher:"Various",points:239,videoVerified:"",firstVictor:"",description:"Alpha Pack 1.",col:"#a04060"},
+{rank:113,name:"Beginner's Luck",publisher:"Various",points:238,videoVerified:"",firstVictor:"",description:"Beginner's Luck.",col:"#60c050"},
+{rank:114,name:"Easy Flow",publisher:"Various",points:237,videoVerified:"",firstVictor:"",description:"Easy Flow.",col:"#3090d0"},
+{rank:115,name:"Slow Beat",publisher:"Various",points:236,videoVerified:"",firstVictor:"",description:"Slow Beat.",col:"#c0a070"},
+{rank:116,name:"Calm Sea",publisher:"Various",points:235,videoVerified:"",firstVictor:"",description:"Calm Sea.",col:"#3080c0"},
+{rank:117,name:"Soft Touch",publisher:"Various",points:234,videoVerified:"",firstVictor:"",description:"Soft Touch.",col:"#e0a0b0"},
+{rank:118,name:"Arcade Roller",publisher:"Various",points:233,videoVerified:"",firstVictor:"",description:"Arcade Roller.",col:"#c06030"},
+{rank:119,name:"Night Drift",publisher:"Various",points:232,videoVerified:"",firstVictor:"",description:"Night Drift.",col:"#203060"},
+{rank:120,name:"Pixel Run",publisher:"Various",points:231,videoVerified:"",firstVictor:"",description:"Pixel Run.",col:"#80c030"},
+{rank:121,name:"Tiny Steps",publisher:"Various",points:230,videoVerified:"",firstVictor:"",description:"Tiny Steps.",col:"#d0a060"}
+];
+
+const PLAYERS=[
+{name:"xXSkibidi_ProXx",score:3,demons:1},
+{name:"noclip_chetr404",score:5,demons:2},
+{name:"yapping_at_47prc",score:7,demons:2},
+{name:"fr_fr_nocap_gd",score:9,demons:3},
+{name:"rizz_gameplay_lol",score:12,demons:4},
+{name:"ohio_demon_slyr",score:15,demons:5},
+{name:"bussin_bt_deadge",score:18,demons:6},
+{name:"sigma_grindset99",score:22,demons:7},
+{name:"gd_brainrot_irl",score:26,demons:8},
+{name:"certifed_L_takr",score:30,demons:9}
+];
+
+// ── ICON ──────────────────────────────────────────────────────
+function dk(h,a){const r=Math.max(0,parseInt(h.slice(1,3),16)-a),g=Math.max(0,parseInt(h.slice(3,5),16)-a),b=Math.max(0,parseInt(h.slice(5,7),16)-a);return`#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`}
+function icon(c,s=38){const id='g'+c.slice(1);return`<svg width="${s}" height="${s}" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${c}"/><stop offset="100%" stop-color="${dk(c,50)}"/></linearGradient></defs><rect width="38" height="38" rx="8" fill="url(#${id})"/><polygon points="10,9 7,2 13,7" fill="${dk(c,70)}"/><polygon points="28,9 31,2 25,7" fill="${dk(c,70)}"/><ellipse cx="13.5" cy="16.5" rx="5" ry="5.8" fill="white" opacity=".95"/><ellipse cx="24.5" cy="16.5" rx="5" ry="5.8" fill="white" opacity=".95"/><ellipse cx="13.8" cy="17.2" rx="2.9" ry="3.3" fill="#110816"/><ellipse cx="24.8" cy="17.2" rx="2.9" ry="3.3" fill="#110816"/><ellipse cx="15" cy="15.8" rx="1.1" ry="1.3" fill="white" opacity=".65"/><ellipse cx="26" cy="15.8" rx="1.1" ry="1.3" fill="white" opacity=".65"/><path d="M12 27 Q19 33 26 27" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/><rect x="16.5" y="27" width="2.5" height="3" rx=".8" fill="white"/><rect x="19.5" y="27" width="2.5" height="3" rx=".8" fill="white"/></svg>`}
+
+// ── STATE ─────────────────────────────────────────────────────
+let activeRank=null;
+
+// ── FILTER / SORT ─────────────────────────────────────────────
+function getFiltered(){
+  const term=document.getElementById('q').value.trim().toLowerCase();
+  const fv=document.getElementById('filter').value;
+  const sk=document.getElementById('sort').value;
+  let arr=LEVELS.filter(l=>{
+    if(term&&!String(l.rank).includes(term)&&!l.name.toLowerCase().includes(term)&&!l.publisher.toLowerCase().includes(term))return false;
+    if(fv==='verified'&&!l.videoVerified)return false;
+    if(fv==='firstvictor'&&!l.firstVictor)return false;
+    return true;
+  });
+  arr.sort((a,b)=>sk==='name'?a.name.localeCompare(b.name):sk==='points'?(b.points||0)-(a.points||0):(a.rank||0)-(b.rank||0));
+  return arr;
+}
+
+// ── RENDER LIST ───────────────────────────────────────────────
+function renderList(){
+  const scroll=document.getElementById('listScroll');
+  const arr=getFiltered();
+  if(!arr.length){scroll.innerHTML='<div class="list-empty">No demons found.</div>';return}
+  scroll.innerHTML=arr.map(l=>{
+    const rc=l.rank===1?'gold':l.rank===2?'silver':l.rank===3?'bronze':'';
+    return`<div class="list-item${l.rank===activeRank?' active':''}" onclick="selectLevel(${l.rank})">
+      <div class="li-rank ${rc}">#${l.rank}</div>
+      <div class="li-icon">${icon(l.col,38)}</div>
+      <div class="li-info"><div class="li-name">${esc(l.name)}</div><div class="li-pub">${esc(l.publisher)}</div></div>
+      <div class="li-pts">${l.points}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── SELECT LEVEL ──────────────────────────────────────────────
+function selectLevel(rank){
+  const l=LEVELS.find(x=>x.rank===rank);
+  if(!l)return;
+  activeRank=rank;
+  renderList();
+  document.getElementById('welcome').style.display='none';
+  const view=document.getElementById('levelView');
+  view.style.display='block';
+  const ytId=ytID(l.videoVerified);
+  const videoHtml=ytId
+    ?`<div class="yt-thumb" onclick="playVideo(this,'${ytId}')" style="cursor:pointer;position:relative;width:100%;height:0;padding-bottom:56.25%;background:#000;overflow:hidden;">
+        <img src="https://i.ytimg.com/vi/${ytId}/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${ytId}/hqdefault.jpg'" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transform:scale(1.15);display:block">
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35)">
+          <div style="width:64px;height:64px;border-radius:50%;background:rgba(230,57,80,.9);display:flex;align-items:center;justify-content:center">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div><div style="position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.7);color:white;font-size:11px;font-weight:700;padding:4px 9px;border-radius:5px;font-family:Nunito,sans-serif">Watch on YouTube
+          </div>
+        </div>
+      </div>`
+    :`<div class="no-video-msg">No verified video available.</div>`;
+  view.innerHTML=`<div class="level-detail">
+    <div class="ld-hero">
+      <div class="ld-hero-top">
+        <div class="ld-icon-lg">${icon(l.col,68)}</div>
+        <div class="ld-hero-info"><h1>${esc(l.name)}</h1><div class="pub">by ${esc(l.publisher)}</div></div>
+        <div class="ld-hero-right"><span class="rank-pill">#${l.rank}</span><div class="pts-pill">${l.points.toFixed(2)} points</div></div>
+      </div>
+    </div>
+    <div class="ld-body">
+      <div class="ld-main">
+        <div class="sec-label">Verified Completion</div>
+        <div class="video-frame">${videoHtml}</div>
+        <div class="ld-desc">${esc(l.description)}</div>
+      </div>
+      <div class="ld-side">
+        <div class="sec-label">Level Info</div>
+        <div class="meta-table">
+          <div class="meta-row"><span class="k">Author</span><span class="v">${esc(l.publisher)}</span></div>
+          <div class="meta-row"><span class="k">Rank</span><span class="v">#${l.rank}</span></div>
+          <div class="meta-row"><span class="k">Points</span><span class="v">${l.points.toFixed(2)}</span></div>
+          <div class="meta-row"><span class="k">Verified</span>${l.videoVerified?'<span class="badge-yes">Available</span>':'<span class="badge-no">None</span>'}</div>
+          <div class="meta-row"><span class="k">1st Victor</span>${l.firstVictor?'<span class="badge-yes">Available</span>':'<span class="badge-no">None</span>'}</div>
+        </div>
+        <div class="link-buttons">
+          ${l.videoVerified?`<a class="link-btn primary" href="${esc(l.videoVerified)}" target="_blank" rel="noopener">Watch Verified Video</a>`:'<span class="link-btn disabled">No Verified Video</span>'}
+          ${l.firstVictor?`<a class="link-btn" href="${esc(l.firstVictor)}" target="_blank" rel="noopener">Watch 1st Victor</a>`:'<span class="link-btn disabled">No 1st Victor</span>'}
+          <button class="link-btn" onclick="copyLink()">Copy Link</button>
+        </div>
+        <div class="records-section">
+          <div class="sec-label">Records</div>
+          <div class="no-rec">No records submitted yet.</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+  document.getElementById('detail').scrollTo(0,0);
+}
+
+// ── VIEWS ─────────────────────────────────────────────────────
+function showWelcome(){
+  activeRank=null;renderList();
+  document.getElementById('welcome').style.display='flex';
+  document.getElementById('levelView').style.display='none';
+}
+function showStats(){
+  activeRank=null;renderList();
+  document.getElementById('welcome').style.display='none';
+  const view=document.getElementById('levelView');
+  view.style.display='block';
+  view.innerHTML=`<div class="level-detail">
+    <div class="ld-hero"><div class="ld-hero-top"><div class="ld-hero-info"><h1>Stats Viewer</h1><div class="pub">Hall of Shame &mdash; All-time Sigma Rankings</div></div></div></div>
+    <div class="ld-main" style="border-right:none">
+      <div class="sec-label" style="margin-bottom:12px">Top Players</div>
+      ${[...PLAYERS].sort((a,b)=>b.demons-a.demons||b.score-a.score).map((p,i)=>`<div class="rec-item"><div class="rec-pos">#${i+1}</div><div class="rec-name">${esc(p.name)}</div><div class="rec-score">${p.demons} demons &bull; ${p.score} pts</div></div>`).join('')}
+      <p style="font-size:12px;color:var(--t3);margin-top:14px;font-style:italic">Records are manually reviewed. Submit yours when you stop crying.</p>
+    </div>
+  </div>`;
+  document.getElementById('detail').scrollTo(0,0);
+}
+function showGuidelines(){
+  activeRank=null;renderList();
+  document.getElementById('welcome').style.display='none';
+  const view=document.getElementById('levelView');
+  view.style.display='block';
+  view.innerHTML=`<div class="level-detail">
+    <div class="ld-hero"><div class="ld-hero-top"><div class="ld-hero-info"><h1>Guidelines</h1><div class="pub">Read before submitting a record</div></div></div></div>
+    <div class="ld-main" style="border-right:none;max-width:620px">
+      <div class="sec-label" style="margin-bottom:12px">Placement Guidelines</div>
+      <p style="font-size:14px;color:var(--t2);line-height:1.8;margin-bottom:12px">A level qualifies for the Sigma Demon List if it meets at least one of the following criteria:</p>
+      <ul style="font-size:13px;color:var(--t2);line-height:2;padding-left:18px">
+        <li>The level looks trivially easy but has secretly killed thousands of players</li>
+        <li>The level name implies it is easy when it is not</li>
+        <li>Beating the level requires a moment of genuine enlightenment</li>
+        <li>The level has caused documented controller damage</li>
+      </ul>
+      <div class="sec-label" style="margin-top:22px;margin-bottom:12px">Record Submission</div>
+      <p style="font-size:14px;color:var(--t2);line-height:1.8">Records are currently not accepted. We barely accept that these levels are completable.</p>
+    </div>
+  </div>`;
+  document.getElementById('detail').scrollTo(0,0);
+}
+
+// ── UTILS ─────────────────────────────────────────────────────
+function playVideo(el,id){window.open('https://www.youtube.com/watch?v='+id,'_blank')}
+function setNav(i){document.querySelectorAll('.nav-link').forEach((el,j)=>el.classList.toggle('active',i===j))}
+function ytID(url){try{if(!url)return null;const u=new URL(url);if(u.hostname.includes('youtu.be'))return u.pathname.slice(1).split('?')[0];if(u.searchParams.get('v'))return u.searchParams.get('v');const m=url.match(/\/embed\/([^?&\/]+)/);if(m)return m[1]}catch(e){}return null}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function copyLink(){navigator.clipboard?.writeText(location.href).then(()=>toast('Link copied!'))}
+function toast(msg){const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300)},2000)}
+
+// ── INIT ──────────────────────────────────────────────────────
+document.getElementById('totalCount').textContent=LEVELS.length;
+document.getElementById('navCount').textContent=LEVELS.length;
+document.getElementById('q').addEventListener('input',renderList);
+document.getElementById('filter').addEventListener('change',renderList);
+document.getElementById('sort').addEventListener('change',renderList);
+renderList();
+selectLevel(1);
+</script>
+</body>
+</html>
